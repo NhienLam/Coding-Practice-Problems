@@ -24,35 +24,38 @@ Constraints:
 
 class Solution {
     public int minDifference(int[] nums) {
-        // kill 3 smallest
-        // kill 2 smallest and 1 biggest
-        // kill 1 smallest and 2 biggest
-        // kill 3 biggest
+        // sort 
+        // kill 3 smallest -> 4
+        // kill 3 biggest -> 1
+        // kill 2 smallest and 1 biggest -> 5
+        // kill 2 biggest and 1 smallest -> 4
         // return the minimum of the 4 ways above
-        
-        if(nums.length < 5) {
+
+        // 0 1 5 10 14 -> 4
+        if(nums.length < 5){
             return 0;
         }
         
-        int[] ways = new int[4];
         Arrays.sort(nums);
-        
+        /*
         // kill 3 smallest
-        ways[0] = nums[nums.length-1] - nums[3];
-        
-        // kill 2 smallest and 1 biggest
-        ways[1]  = nums[nums.length-2] - nums[2];
-        
-        // kill 1 smallest and 2 biggest
-        ways[2]  = nums[nums.length-3] - nums[1];
+        int dif1 = nums[nums.length-1] - nums[3];
         
         // kill 3 biggest
-        ways[3]  = nums[nums.length-4] - nums[0];
+        int dif2 = nums[nums.length-1 - 3] - nums[0];
         
-        int minDiff = ways[0];
-        for(int i = 1; i < ways.length; i++) {
-           minDiff = Math.min(ways[i], minDiff);
+        // kill 2 smallest and 1 biggest
+        int dif3 = nums[nums.length-1 -1] - nums[2];
+        
+        // kill 2 biggest and 1 smallest
+        int dif4 = nums[nums.length-1 - 2] - nums[1];
+        */
+        
+        int min = Integer.MAX_VALUE;
+        for(int i = 0; i < 4; i++) {
+            min = Math.min(min, nums[nums.length-1-i] - nums[3-i]);
         }
-        return minDiff;
+        
+        return min;
     }
 }
